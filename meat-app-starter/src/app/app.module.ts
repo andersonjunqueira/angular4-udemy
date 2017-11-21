@@ -17,7 +17,7 @@ import { ShoppingCartComponent } from './restaurant-details/shopping-cart/shoppi
 import { MenuItemComponent } from './restaurant-details/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-details/reviews/reviews.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
-
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     ShoppingCartComponent,
     MenuItemComponent,
     ReviewsComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

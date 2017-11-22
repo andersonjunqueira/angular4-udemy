@@ -2,7 +2,7 @@ import { CartItem } from '../restaurant-details/shopping-cart/cart-item.model';
 import { ShoppingCartService } from '../restaurant-details/shopping-cart/shopping-cart.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 import { Order, OrderItem } from './order.model';
@@ -13,7 +13,7 @@ export class OrderService {
 
   constructor(
     private cartService: ShoppingCartService, 
-    private http: Http) {
+    private http: HttpClient) {
   }
 
   cartItems(): CartItem[] {
@@ -37,16 +37,8 @@ export class OrderService {
   }
 
   checkOrder(order: Order): Observable<string> {
-    const headers = new Headers();
-    headers.append('Content-type', 'application/json');
-
-    return this.http.post(
-      `${MEAT_API}/orders`, 
-      JSON.stringify(order),
-      new RequestOptions({headers}))
-      .map(response => response.json())
+    return this.http.post<Order>(`${MEAT_API}/orders`, order)
       .map(order => order.id);
-
   }
 
   clear() {
@@ -54,14 +46,7 @@ export class OrderService {
   }
 
   updateRating(orderId: number, rate: number): Observable<string> {
-    const headers = new Headers();
-    headers.append('Content-type', 'application/json');
-
-    return this.http.patch(
-      `${MEAT_API}/orders/${orderId}`, 
-      JSON.stringify({rating: rate}),
-      new RequestOptions({headers}))
-      .map(response => response.json());
+    return this.http.patch<string>(`${MEAT_API}/orders/${orderId}`, {});
   }
 
 }
